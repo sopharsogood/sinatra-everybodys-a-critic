@@ -1,9 +1,8 @@
 <h3><%= @message.user.link %> wrote in <%= @message.topic.link %>:</h3>
-
+<br>
 <p><%= @message.content %></p>
-
+<br>
 <% if @message.user == Helper.current_user(@session) %>
-<br><br>
 <p><a href="/messages/<%= @message.id %>/edit">Edit Message</a></p>
 <p><a href="/messages/<%= @message.id %>/delete">Delete Message</a></p>
 <% end %>
