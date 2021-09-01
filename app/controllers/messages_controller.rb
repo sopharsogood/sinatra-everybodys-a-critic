@@ -36,6 +36,11 @@ class MessagesController < ApplicationController
         end
     end
 
+    get '/messages/new' do
+        flash[:message] = "New messages must be created as new topics or as replies to existing topics."
+        redirect '/topics'
+    end
+
     post '/topics/:id/reply' do
         if !Helper.logged_in?(session)
             flash[:message] = "You must be logged in to post messages."
