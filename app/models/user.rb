@@ -3,5 +3,5 @@ class User < ActiveRecord::Base
     validates :username, presence: true, uniqueness: true
 
     has_many :messages
-    has_many :threads, through: :messages
+    has_many :topics, through: :messages
 end
