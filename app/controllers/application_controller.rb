@@ -11,6 +11,10 @@ class ApplicationController < Sinatra::Base
         use Rack::Flash
     end
 
+    get '/' do
+        redirect '/topics'
+    end
+
     class Helper
         def self.logged_in?(session)
             !!session[:user_id]
