@@ -44,11 +44,12 @@ class TopicsController < ApplicationController
             session[:failed_due_to_not_logged_in] = '/topics/new'
             redirect '/login'
         end
-        if params[:topic][:title] == "" || params[:topic][:first_message] == ""
+        if params[:title] == "" || params[:first_message] == ""
             flash[:message] = "The topic title and the first message can't be blank."
             redirect '/tweets/new'
         end
-        topic = Topic.create(params[:topic])
+        topic = Topic.create(user: Helper.current_user(session), title: params[:title])
+        first_post = Message.create(user: Helper.current_user(session), topic: topic, content: params[:first_message])
         flash[:message] = "New topic posted!"
         redirect '/topics/' + topic.id.to_s
     end
