@@ -28,5 +28,9 @@ class User < ActiveRecord::Base
         end
     end
 
+    def link
+        "<a href='/users/#{self.slug}'>#{self.username}</a>"
+    end
+
     
 end

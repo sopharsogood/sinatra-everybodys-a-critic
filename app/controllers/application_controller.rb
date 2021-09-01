@@ -11,4 +11,15 @@ class ApplicationController < Sinatra::Base
         use Rack::Flash
     end
 
+    class Helper
+        def logged_in?(session)
+            !!session[:user_id]
+        end
+
+        def current_user(session)
+            User.find_by(id: session[:user_id])
+        end
+    end
+
+
 end

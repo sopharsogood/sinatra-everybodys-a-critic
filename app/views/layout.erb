@@ -4,6 +4,11 @@
     <title><%= flash[:title] %></title>
   </head>
   <body>
+  <% if Helper.logged_in?(@session) %>
+  <%= Helper.current_user(@session).link %> | <a href='/topics'>Board Index</a>
+  <% else %>
+  <a href='/login'>Log In</a> | <a href='/signup'>Sign Up</a>
+  <% end %>
 
     <% if flash.has?(:message) %> <%= flash[:message] %><br><br> <% end %>
     
