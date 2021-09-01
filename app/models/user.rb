@@ -26,4 +26,6 @@ class User < ActiveRecord::Base
             user.slug == slug
         end
     end
+
+    
 end
