@@ -19,7 +19,7 @@ class TopicsController < ApplicationController
     get '/topics/:id' do
         @topic = Topic.find_by(id: params[:id])
         @session = session
-        erb :'/tweets/show_tweet'
+        erb :'/topics/show'
     end
 
     get '/topics/:id/edit' do
