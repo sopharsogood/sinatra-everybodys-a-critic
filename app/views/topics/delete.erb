@@ -1,0 +1,7 @@
+<h4>Are you sure you want to delete <%= @topic.link %> and all messages in it? This cannot be undone!</h4>
+
+<p><a href="/topics/<%= @topic.id %>">No, don't delete it.</a></p>
+<form action="/topics/<%= @topic.id %>" method="POST">
+<input type="hidden" action="_method" value="DELETE">
+<input type="submit" name="Delete Topic">
+</form>

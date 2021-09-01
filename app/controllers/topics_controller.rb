@@ -59,8 +59,8 @@ class TopicsController < ApplicationController
             session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/delete'
             redirect '/login'
         end
-        topic = Topic.find_by(id: params[:id])
-        if Helper.current_user(session) == topic.op
+        @topic = Topic.find_by(id: params[:id])
+        if Helper.current_user(session) == @topic.op
             @session = session
             erb :'/topics/delete'
         else
