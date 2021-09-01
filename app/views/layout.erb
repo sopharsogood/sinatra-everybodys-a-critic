@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= flash[:title] %></title>
+  </head>
+  <body>
+
+    <% if flash.has?(:message) %> <%= flash[:message] %><br><br> <% end %>
+    
+    <%= yield %>
+
+  </body>
+</html>
