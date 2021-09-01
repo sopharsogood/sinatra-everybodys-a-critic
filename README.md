@@ -14,4 +14,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/sophar
 ## License:
 
 This program is released under the MIT License. See here for more information:
-https://github.com/sopharsogood/boardgamegeek-scraper/blob/main/LICENSE
+https://github.com/sopharsogood/sinatra-messageboard/blob/main/LICENSE
