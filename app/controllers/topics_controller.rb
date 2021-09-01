@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
 
     get '/topics' do
         @session = session
-        @topics = Topic.all.sort_by {|topic| topic.messages.last.created_at}
+        @topics = Topic.all.sort_by {|topic| topic.messages.last.created_at}.reverse
         erb :'/topics/index'
     end
 
