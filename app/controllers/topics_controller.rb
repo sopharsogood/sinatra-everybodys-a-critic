@@ -96,13 +96,14 @@ class TopicsController < ApplicationController
             session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/edit'
             redirect '/login'
         end
-        if params[:topic][:title] == "" || params[:topic][:first_message] == ""
+        if params[:title] == "" || params[:first_message] == ""
             flash[:message] = "The topic title and the first message can't be made blank."
             redirect '/topics/' + params[:id] + '/edit'
         end
         topic = Topic.find_by(id: params[:id])
         if Helper.current_user(session) == topic.op
-            topic.update(params[:topic])
+            topic.update(title: params[:title])
+            topic.messages.first.update(content: params[:first_message])
             flash[:message] = "Topic updated!"
         else
             flash[:message] = "Only the original poster of a topic can edit it."
