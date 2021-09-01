@@ -1,5 +1,5 @@
 # sinatra-messageboard
-### Flatiron software engineering, phase 1 project
+### Flatiron software engineering, phase 2 project
 
 A Sinatra web application where users can talk via classic forum posts.
 
