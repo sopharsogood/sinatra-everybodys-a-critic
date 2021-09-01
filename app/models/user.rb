@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
         " " => "-",
         '"' => "",
         "'" => "",
-        "+" => "plus"
+        "+" => "plus",
+        "-" => "-"
     }
 
     def slug
