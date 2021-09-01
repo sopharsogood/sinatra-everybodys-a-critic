@@ -5,10 +5,11 @@
   </head>
   <body>
   <% if Helper.logged_in?(@session) %>
-  <%= Helper.current_user(@session).link %> | <a href='/logout'>Log Out</a> | <a href='/topics'>Board Index</a>
+  <%= Helper.current_user(@session).link %> | <a href='/logout'>Log Out</a> 
   <% else %>
-  <a href='/login'>Log In</a> | <a href='/signup'>Sign Up</a>
+  <a href='/login'>Log In</a> | <a href='/signup'>Sign Up</a> 
   <% end %>
+   | <a href='/topics'>Board Index</a>
   <br>
   <br>
 
