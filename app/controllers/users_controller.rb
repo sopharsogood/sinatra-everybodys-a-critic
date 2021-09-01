@@ -6,7 +6,7 @@ class UsersController < ApplicationController
             redirect '/topics'
         end
         @session = session
-        erb :'/users/create_user'
+        erb :'/users/signup'
     end
 
     get '/login' do
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-        user = User.new(params[user])
+        user = User.new(params[:user])
         if user.save
             session[:user_id] = user.id
             session[:message] = "Signup successful! Welcome, #{Helper.current_user(session).username}!"
