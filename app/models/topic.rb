@@ -5,4 +5,8 @@ class Topic < ActiveRecord::Base
     def link
         "<a href='/users/#{self.id}'>#{self.title}</a>"
     end
+
+    def op
+        self.messages.first.user
+    end
 end
