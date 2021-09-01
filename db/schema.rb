@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_044321) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "thread_id"
+    t.integer "topic_id"
     t.string "content"
     t.datetime "created_at"
   end
