@@ -6,4 +6,6 @@ end
 
 use Rack::MethodOverride
 use TopicsController
+use UsersController
+use MessagesController
 run ApplicationController
