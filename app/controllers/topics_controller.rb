@@ -3,7 +3,6 @@ class TopicsController < ApplicationController
     get '/topics' do
         @session = session
         @topics = Topic.all.sort_by {|topic| topic.messages.last.created_at}
-        binding.pry
         erb :'/topics/index'
     end
 
@@ -47,9 +46,9 @@ class TopicsController < ApplicationController
         end
         if params[:title] == "" || params[:first_message] == ""
             flash[:message] = "The topic title and the first message can't be blank."
-            redirect '/tweets/new'
+            redirect '/topics/new'
         end
-        topic = Topic.create(user: Helper.current_user(session), title: params[:title])
+        topic = Topic.create(title: params[:title])
         first_post = Message.create(user: Helper.current_user(session), topic: topic, content: params[:first_message])
         flash[:message] = "New topic posted!"
         redirect '/topics/' + topic.id.to_s
