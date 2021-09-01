@@ -2,6 +2,6 @@
 <form action="/topics/<%= @topic.id %>" method="POST">
 <input type="hidden" name="_method" value="PATCH">
 <p>Topic Title: <input type="text" size=79 name="title" value="<%= @topic.title %>"></p>
-<p>First Post: <textarea rows=6 cols=80 name="first_message" value="<%= @topic.messages.first.content %>"></textarea></p>
+<p>First Post: <textarea rows=6 cols=80 name="first_message"><%= @topic.messages.first.content %></textarea></p>
 <p><input type="submit" name="Edit Topic"></p>
 </form>

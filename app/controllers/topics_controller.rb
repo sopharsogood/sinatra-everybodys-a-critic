@@ -90,7 +90,7 @@ class TopicsController < ApplicationController
         end
     end
 
-    patch '/tweets/:id' do
+    patch '/topics/:id' do
         if !Helper.logged_in?(session)
             flash[:message] = "You must be logged in to edit topics."
             session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/edit'
