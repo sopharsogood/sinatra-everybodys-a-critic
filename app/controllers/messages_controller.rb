@@ -26,7 +26,7 @@ class MessagesController < ApplicationController
         @message = Message.find_by(id: params[:id])
         if Helper.current_user(session) != @message.user
             flash[:message] = "Only the original poster of a message can edit it."
-            redirect '/topics/' + params[:id]
+            redirect '/topics/' + params[:id].to_s
         end
         if @message.topic.messages.first == @message
             redirect '/topics/' + @message.topic.id.to_s + '/edit'
@@ -35,6 +35,20 @@ class MessagesController < ApplicationController
             erb :'/messages/edit'
         end
     end
-        
+
+    post '/topics/:id/reply' do
+        if !Helper.logged_in?(session)
+            flash[:message] = "You must be logged in to post messages."
+            session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/reply'
+            redirect '/login'
+        end
+        if params[:content] == ""
+            flash[:message] = "Messages can't be blank."
+            redirect '/topics/' + params[:id].to_s + '/reply'
+        end
+        topic = Topic.find_by(id: params[:id])
+        message = Message.create(user: Helper.current_user(session), content: params[:content], topic: topic)
+        redirect '/topics/' + params[:id].to_s
+    end
 
 end
