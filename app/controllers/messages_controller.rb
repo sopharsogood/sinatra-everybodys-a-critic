@@ -62,6 +62,10 @@ class MessagesController < ApplicationController
             session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/edit'
             redirect '/login'
         end
+        if params[:content] == ""
+            flash[:message] = "Messages can't be blank."
+            redirect '/messages/' + params[:id].to_s + '/edit'
+        end
         message = Message.find_by(id: params[:id])
         if Helper.current_user(session) != message.user
             flash[:message] = "Only the original poster of a message can edit it."
@@ -69,7 +73,7 @@ class MessagesController < ApplicationController
         end
         message.update(content: params[:content])
         flash[:message] = "Message edited!"
-        redirect '/topics/' + message.topic.id
+        redirect '/topics/' + message.topic.id.to_s
     end
 
 end
