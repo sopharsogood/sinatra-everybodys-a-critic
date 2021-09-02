@@ -67,7 +67,6 @@ class UsersController < ApplicationController
     get '/users/:slug' do
         @user = User.find_by_slug(params[:slug])
         @session = session
-        @topics = Topic.all.select {|topic| topic.messages.first.user == @user}.reverse # Gets topics user created; user.topics is all topics user posted in
         erb :'/users/show'
     end
 end

@@ -36,5 +36,9 @@ class User < ActiveRecord::Base
     def topics_uniq
         self.topics.uniq
     end
+
+    def topics_created # because user.topics returns the topics the user has posted in, not created
+        Topic.all.select {|topic| topic.op == self}
+    end
     
 end
