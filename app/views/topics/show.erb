@@ -11,7 +11,7 @@
 <% @topic.messages.each do |message| %>
     <tr>
     <td><b><%= message.user.link %></b></td>
-    <td><%= message.content %></td>
+    <td><%= message.display_content %></td>
     <td><a href="/messages/<%= message.id %>">View</a><br>
     <% if message.user == Helper.current_user(@session)%>
         <a href="/messages/<%= message.id %>/edit">Edit</a><br>

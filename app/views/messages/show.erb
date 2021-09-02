@@ -1,6 +1,6 @@
 <h2><%= @message.user.link %> wrote in <%= @message.topic.link %>:</h2>
 <br>
-<p><%= @message.content %></p>
+<p><%= @message.display_content %></p>
 <br>
 <% if @message.user == Helper.current_user(@session) %>
 <p><a href="/messages/<%= @message.id %>/edit">Edit Message</a></p>
