@@ -10,12 +10,12 @@
 
 <% @topic.messages.each do |message| %>
     <tr>
-    <td><b><%= message.user.link %></b></td>
+    <td class="poster"><b><%= message.user.link %></b></td>
     <td><%= message.display_content %></td>
-    <td><a href="/messages/<%= message.id %>">View</a><br>
+    <td class="details"><a href="/messages/<%= message.id %>">(View)</a><br>
     <% if message.user == Helper.current_user(@session)%>
-        <a href="/messages/<%= message.id %>/edit">Edit</a><br>
-        <a href="/messages/<%= message.id %>/delete">Delete</a><br>
+        <a href="/messages/<%= message.id %>/edit">(Edit)</a>
+        <a href="/messages/<%= message.id %>/delete">(Delete)</a><br>
     <% end %>
     <%= message.created_at.strftime("%H:%M %d/%m/%Y")%>
     </td></tr>

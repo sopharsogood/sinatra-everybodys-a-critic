@@ -2,14 +2,14 @@
 
 <table>
 <tr>
-<th>Original Poster</th><th>Topic</th><th>Posts</th><th>Newest Post</th>
+<th class="poster">Original Poster</th><th>Topic</th><th>Posts</th><th>Newest Post</th>
 </tr>
 <% @topics.each do |topic| %>
     <tr>
-    <td><%= topic.op.link %></td>
+    <td class="poster"><%= topic.op.link %></td>
     <td><%= topic.link %></td>
-    <td><%= topic.messages.count %></td>
-    <td><%= topic.messages.last.user.link %><br><%= topic.messages.last.created_at.strftime("%H:%M %d/%m/%Y") %></td>
+    <td class="postcount"><%= topic.messages.count %></td>
+    <td class="details"><%= topic.messages.last.user.link %><br><%= topic.messages.last.created_at.strftime("%H:%M %d/%m/%Y") %></td>
     </tr>
 <% end %>
 </table>

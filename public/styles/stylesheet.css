@@ -1,0 +1,17 @@
+table, th, td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+th {
+    background-color: deepskyblue;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.poster, .details, .postcount {
+    text-align: center;
+}
