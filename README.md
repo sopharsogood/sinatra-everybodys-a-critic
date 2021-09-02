@@ -5,7 +5,7 @@ A Sinatra web application where users can talk via classic forum posts.
 
 ## Installation:
 
-Go to https://github.com/sopharsogood/sinatra-messageboard and clone the repository to your local system. Perform a "$ bundle install" and $ "rake db:migrate" as setup. Mount the site with "$ shotgun".
+Go to https://github.com/sopharsogood/sinatra-messageboard and clone the repository to your local system. Perform a `$ bundle install` and `$ rake db:migrate` as setup. Mount the site with `$ shotgun`.
 
 ## Contributing:
 
