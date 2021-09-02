@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
 
     get '/topics' do
+        session[:failed_due_to_not_logged_in] = nil if session[:failed_due_to_not_logged_in] # This is no longer relevant after you go back to the topic list
         @session = session
         @topics = Topic.all.sort_by {|topic| topic.messages.last.created_at}.reverse
         erb :'/topics/index'
