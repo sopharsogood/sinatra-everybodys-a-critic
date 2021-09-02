@@ -1,0 +1,22 @@
+<h1><%= @user.username %> Profile</h1>
+
+<h3>Created <%= @topics.count %> topics:</h3>
+<ul>
+<% @topics.each do |topic| %>
+    <li><%= topic.link %></li>
+<% end %>
+</ul>
+<h3>Posted <%= @user.messages.count %> messages:</h3>
+<ul>
+<% @user.messages.each do |message| %>
+    <li><%= message.display_content %> <a href="/messages/<%= message.id %>">(view)</a></li><br>
+<% end %>
+</ul>
+<h3>Posted in <%= @user.topics.count %> topics:</h3>
+<ul>
+<% @user.topics.each do |topic| %>
+    <li><%= topic.link %></li>
+<% end %>
+</ul>
+
+<p><a href='/topics'>Return to board index</a></p>
