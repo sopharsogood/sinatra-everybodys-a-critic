@@ -36,6 +36,25 @@ class MessagesController < ApplicationController
         end
     end
 
+    get '/messages/:id/delete' do
+        if !Helper.logged_in?(session)
+            flash[:message] = "You must be logged in to delete messages."
+            session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/delete'
+            redirect '/login'
+        end
+        @message = Message.find_by(id: params[:id])
+        if Helper.current_user(session) != @message.user
+            flash[:message] = "Only the original poster of a message can delete it."
+            redirect '/topics/' + params[:id].to_s
+        end
+        if @message.topic.messages.first == @message
+            redirect '/topics/' + @message.topic.id.to_s + '/delete'
+        else
+            @session = session
+            erb :'/messages/delete'
+        end
+    end
+
     get '/messages/new' do
         flash[:message] = "New messages must be created as new topics or as replies to existing topics."
         redirect '/topics'
@@ -74,6 +93,23 @@ class MessagesController < ApplicationController
         message.update(content: params[:content])
         flash[:message] = "Message edited!"
         redirect '/topics/' + message.topic.id.to_s
+    end
+
+    delete '/messages/:id' do
+        if !Helper.logged_in?(session)
+            flash[:message] = "You must be logged in to delete messages."
+            session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/delete'
+            redirect '/login'
+        end
+        message = Message.find_by(id: params[:id])
+        if Helper.current_user(session) != message.user
+            flash[:message] = "Only the original poster of a message can delete it."
+            redirect '/topics/' + params[:id].to_s
+        else
+            topic = message.topic
+            message.delete
+            redirect '/topics/' + topic.id.to_s
+        end
     end
 
 end

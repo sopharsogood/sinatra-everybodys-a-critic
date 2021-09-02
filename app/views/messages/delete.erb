@@ -1,0 +1,7 @@
+<h4>Are you sure you want to delete this reply to <%= @message.topic.link %>?</h4>
+<p><%= @message.display_content %></p>
+<p><a href="/messages/<%= @message.id %>">No, don't delete it.</a></p>
+<form action="/messages/<%= @message.id %>" method="POST">
+<input type="hidden" action="_method" value="DELETE">
+<input type="submit" name="Delete Message">
+</form>
