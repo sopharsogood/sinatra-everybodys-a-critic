@@ -12,9 +12,9 @@
     <li><%= message.display_content %> <a href="/messages/<%= message.id %>">(view)</a></li><br>
 <% end %>
 </ul>
-<h3>Posted in <%= @user.topics.uniq.count %> topics:</h3>
+<h3>Posted in <%= @user.topics_uniq.count %> topics:</h3>
 <ul>
-<% @user.topics.reverse.uniq.each do |topic| %>
+<% @user.topics_uniq.reverse.each do |topic| %>
     <li><%= topic.link %></li>
 <% end %>
 </ul>

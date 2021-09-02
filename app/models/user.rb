@@ -33,5 +33,8 @@ class User < ActiveRecord::Base
         "<a href='/users/#{self.slug}'>#{self.username}</a>"
     end
 
+    def topics_uniq
+        self.topics.uniq
+    end
     
 end
