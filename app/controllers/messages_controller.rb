@@ -108,6 +108,7 @@ class MessagesController < ApplicationController
         else
             topic = message.topic
             message.delete
+            flash[:message] = "Message deleted!"
             redirect '/topics/' + topic.id.to_s
         end
     end

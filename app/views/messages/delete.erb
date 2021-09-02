@@ -2,6 +2,6 @@
 <p><%= @message.display_content %></p>
 <p><a href="/messages/<%= @message.id %>">No, don't delete it.</a></p>
 <form action="/messages/<%= @message.id %>" method="POST">
-<input type="hidden" action="_method" value="DELETE">
+<input type="hidden" name="_method" value="DELETE">
 <input type="submit" name="Delete Message">
 </form>
