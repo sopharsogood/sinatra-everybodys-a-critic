@@ -8,13 +8,13 @@
 </ul>
 <h3>Posted <%= @user.messages.count %> messages:</h3>
 <ul>
-<% @user.messages.each do |message| %>
+<% @user.messages.reverse.each do |message| %>
     <li><%= message.display_content %> <a href="/messages/<%= message.id %>">(view)</a></li><br>
 <% end %>
 </ul>
-<h3>Posted in <%= @user.topics.count %> topics:</h3>
+<h3>Posted in <%= @user.topics.uniq.count %> topics:</h3>
 <ul>
-<% @user.topics.each do |topic| %>
+<% @user.topics.reverse.uniq.each do |topic| %>
     <li><%= topic.link %></li>
 <% end %>
 </ul>
