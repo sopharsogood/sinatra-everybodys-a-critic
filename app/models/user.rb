@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     end
 
     def topics_uniq
-        self.topics.uniq
+        self.topics.reverse.uniq.reverse
     end
 
     def topics_created # because user.topics returns the topics the user has posted in, not created
