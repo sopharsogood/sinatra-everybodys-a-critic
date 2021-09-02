@@ -50,6 +50,7 @@ class UsersController < ApplicationController
         user = User.new(params[:user])
         if user.save
             session[:user_id] = user.id
+            session[:failed_due_to_not_logged_in] = nil if session[:failed_due_to_not_logged_in]
             session[:message] = "Signup successful! Welcome, #{Helper.current_user(session).username}!"
             redirect '/topics'
         else
