@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Sinatra Messageboard</title>
+    <link rel="stylesheet" href="/styles/stylesheet.css">
   </head>
   <body>
   <% if Helper.logged_in?(@session) %>
@@ -12,7 +13,7 @@
    | <a href='/topics'>Board Index</a>
   <br>
   <br>
-
+<p>hello</p>
     <% if flash.has?(:message) %> <%= flash[:message] %><br><br> <% end %>
     
     <%= yield %>
