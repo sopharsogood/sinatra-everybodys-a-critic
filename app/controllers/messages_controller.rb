@@ -56,4 +56,20 @@ class MessagesController < ApplicationController
         redirect '/topics/' + params[:id].to_s
     end
 
+    patch '/messages/:id/edit' do
+        if !Helper.logged_in?(session)
+            flash[:message] = "You must be logged in to edit messages."
+            session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/edit'
+            redirect '/login'
+        end
+        message = Message.find_by(id: params[:id])
+        if Helper.current_user(session) != message.user
+            flash[:message] = "Only the original poster of a message can edit it."
+            redirect '/topics/' + params[:id].to_s
+        end
+        message.update(content: params[:content])
+        flash[:message] = "Message edited!"
+        redirect '/topics/' + message.topic.id
+    end
+
 end

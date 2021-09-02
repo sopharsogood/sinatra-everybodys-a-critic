@@ -1,0 +1,6 @@
+<h2>Edit reply to <%= @message.topic.link %></h2>
+<form action="/messages/<%= @message.id %>/edit" method="POST">
+<input type="hidden" name="_method" value="PATCH">
+<p><textarea rows=6 cols=80 name="content"><%= @message.content %></textarea></p>
+<p><input type="submit" name="Edit Message"></p>
+</form>
