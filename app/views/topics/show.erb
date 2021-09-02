@@ -2,14 +2,14 @@
 
 <p><a href="/topics/<%= @topic.id %>/reply">Post in this thread</a></p>
 <table>
-<tr>
+<tr class="topic_header">
 <th>Poster</th>
 <th>Post</th>
 <th>Info</th>
 </tr>
 
-<% @topic.messages.each do |message| %>
-    <tr>
+<% @topic.messages.each_with_index do |message, index| %>
+    <tr class="<%= index % 2 == 0 ? "even" : "odd" %>">
     <td class="poster"><b><%= message.user.link %></b></td>
     <td><%= message.display_content %></td>
     <td class="details"><a href="/messages/<%= message.id %>">(View)</a><br>

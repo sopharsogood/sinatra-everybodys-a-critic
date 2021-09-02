@@ -3,10 +3,6 @@ table, th, td {
     padding: 8px;
 }
 
-th {
-    background-color: deepskyblue;
-}
-
 table {
     width: 80%;
     border-collapse: collapse;
@@ -14,4 +10,20 @@ table {
 
 .poster, .details, .postcount {
     text-align: center;
+}
+
+tr.even {
+    background-color: #EEEEEE;
+}
+
+tr.odd {
+    background-color: #DDDDDD;
+}
+
+tr.index_header {
+    background-color: palegreen;
+}
+
+tr.topic_header {
+    background-color: deepskyblue;
 }

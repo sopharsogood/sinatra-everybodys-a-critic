@@ -1,11 +1,11 @@
 <p><a href='/topics/new'>Create New Topic</a></p>
 
 <table>
-<tr>
-<th class="poster">Original Poster</th><th>Topic</th><th>Posts</th><th>Newest Post</th>
+<tr class="index_header">
+<th>Original Poster</th><th>Topic</th><th>Posts</th><th>Newest Post</th>
 </tr>
-<% @topics.each do |topic| %>
-    <tr>
+<% @topics.each_with_index do |topic, index| %>
+    <tr class="<%= index % 2 == 0 ? "even" : "odd" %>">
     <td class="poster"><%= topic.op.link %></td>
     <td><%= topic.link %></td>
     <td class="postcount"><%= topic.messages.count %></td>
