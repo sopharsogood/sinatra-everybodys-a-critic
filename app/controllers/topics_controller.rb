@@ -20,11 +20,7 @@ class TopicsController < ApplicationController
     end
 
     get '/topics/:id/edit' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to edit topics."
-            session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/edit'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'edit a topic','/topics/' + params[:id].to_s + '/edit')
         @topic = Topic.find_by(id: params[:id])
         if current_user(session) == @topic.op
             @session = session
@@ -36,11 +32,7 @@ class TopicsController < ApplicationController
     end
 
     post '/topics/new' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to create a new topic."
-            session[:failed_due_to_not_logged_in] = '/topics/new'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'create a new topic','/topics/new')
         if params[:title] == "" || params[:first_message] == ""
             flash[:message] = "The topic title and the first message can't be blank."
             redirect '/topics/new'
@@ -52,11 +44,7 @@ class TopicsController < ApplicationController
     end
 
     get '/topics/:id/delete' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to delete a topic!"
-            session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/delete'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'delete a topic','/topics/' + params[:id].to_s + '/delete')
         @topic = Topic.find_by(id: params[:id])
         if current_user(session) == @topic.op
             @session = session
@@ -68,11 +56,7 @@ class TopicsController < ApplicationController
     end
 
     delete '/topics/:id' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to delete a topic!"
-            session[:failed_due_to_not_logged_in] = '/topics' + params[:id].to_s + '/delete'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'delete a topic','/topics/' + params[:id].to_s + '/delete')
         topic = Topic.find_by(id: params[:id])
         if current_user(session) == topic.op
             topic.messages.each do |message|
@@ -88,11 +72,7 @@ class TopicsController < ApplicationController
     end
 
     patch '/topics/:id' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to edit topics."
-            session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/edit'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'edit a topic','/topics/' + params[:id].to_s + '/edit')
         if params[:title] == "" || params[:first_message] == ""
             flash[:message] = "The topic title and the first message can't be made blank."
             redirect '/topics/' + params[:id] + '/edit'
