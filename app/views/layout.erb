@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="/styles/stylesheet.css">
   </head>
   <body>
-  <% if Helper.logged_in?(@session) %>
-  <%= Helper.current_user(@session).link %> | <a href='/logout'>Log Out</a> 
+  <% if logged_in?(@session) %>
+  <%= current_user(@session).link %> | <a href='/logout'>Log Out</a> 
   <% else %>
   <a href='/login'>Log In</a> | <a href='/signup'>Sign Up</a> 
   <% end %>

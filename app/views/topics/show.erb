@@ -13,7 +13,7 @@
     <td class="poster"><b><%= message.user.link %></b></td>
     <td><%= message.display_content %></td>
     <td class="details"><a href="/messages/<%= message.id %>">(View)</a><br>
-    <% if message.user == Helper.current_user(@session)%>
+    <% if message.user == current_user(@session)%>
         <a href="/messages/<%= message.id %>/edit">(Edit)</a>
         <a href="/messages/<%= message.id %>/delete">(Delete)</a><br>
     <% end %>

@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
 
     get '/topics/:id/reply' do
-        if !Helper.logged_in?(session)
+        if !logged_in?(session)
             flash[:message] = "You must be logged in to post messages."
             session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/reply'
             redirect '/login'
@@ -18,13 +18,13 @@ class MessagesController < ApplicationController
     end
 
     get '/messages/:id/edit' do
-        if !Helper.logged_in?(session)
+        if !logged_in?(session)
             flash[:message] = "You must be logged in to edit messages."
             session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/edit'
             redirect '/login'
         end
         @message = Message.find_by(id: params[:id])
-        if Helper.current_user(session) != @message.user
+        if current_user(session) != @message.user
             flash[:message] = "Only the original poster of a message can edit it."
             redirect '/topics/' + params[:id].to_s
         end
@@ -37,13 +37,13 @@ class MessagesController < ApplicationController
     end
 
     get '/messages/:id/delete' do
-        if !Helper.logged_in?(session)
+        if !logged_in?(session)
             flash[:message] = "You must be logged in to delete messages."
             session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/delete'
             redirect '/login'
         end
         @message = Message.find_by(id: params[:id])
-        if Helper.current_user(session) != @message.user
+        if current_user(session) != @message.user
             flash[:message] = "Only the original poster of a message can delete it."
             redirect '/topics/' + params[:id].to_s
         end
@@ -61,7 +61,7 @@ class MessagesController < ApplicationController
     end
 
     post '/topics/:id/reply' do
-        if !Helper.logged_in?(session)
+        if !logged_in?(session)
             flash[:message] = "You must be logged in to post messages."
             session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/reply'
             redirect '/login'
@@ -71,12 +71,12 @@ class MessagesController < ApplicationController
             redirect '/topics/' + params[:id].to_s + '/reply'
         end
         topic = Topic.find_by(id: params[:id])
-        message = Message.create(user: Helper.current_user(session), content: params[:content], topic: topic)
+        message = Message.create(user: current_user(session), content: params[:content], topic: topic)
         redirect '/topics/' + params[:id].to_s
     end
 
     patch '/messages/:id/edit' do
-        if !Helper.logged_in?(session)
+        if !logged_in?(session)
             flash[:message] = "You must be logged in to edit messages."
             session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/edit'
             redirect '/login'
@@ -86,7 +86,7 @@ class MessagesController < ApplicationController
             redirect '/messages/' + params[:id].to_s + '/edit'
         end
         message = Message.find_by(id: params[:id])
-        if Helper.current_user(session) != message.user
+        if current_user(session) != message.user
             flash[:message] = "Only the original poster of a message can edit it."
             redirect '/topics/' + params[:id].to_s
         end
@@ -96,13 +96,13 @@ class MessagesController < ApplicationController
     end
 
     delete '/messages/:id' do
-        if !Helper.logged_in?(session)
+        if !logged_in?(session)
             flash[:message] = "You must be logged in to delete messages."
             session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/delete'
             redirect '/login'
         end
         message = Message.find_by(id: params[:id])
-        if Helper.current_user(session) != message.user
+        if current_user(session) != message.user
             flash[:message] = "Only the original poster of a message can delete it."
             redirect '/topics/' + params[:id].to_s
         else

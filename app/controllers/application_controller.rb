@@ -15,13 +15,21 @@ class ApplicationController < Sinatra::Base
         redirect '/topics'
     end
 
-    class Helper
-        def self.logged_in?(session)
+    helpers do
+        def logged_in?(session)
             !!session[:user_id]
         end
 
-        def self.current_user(session)
+        def current_user(session)
             User.find_by(id: session[:user_id])
+        end
+
+        def redirect_if_logged_out(session, flash, message, route)
+            if !logged_in?(session)
+                flash[:message] = "You must be logged in to #{message}."
+                session[:failed_due_to_not_logged_in] = route
+                redirect '/login'
+            end
         end
     end
 
