@@ -1,11 +1,7 @@
 class MessagesController < ApplicationController
 
     get '/topics/:id/reply' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to post messages."
-            session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/reply'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'post a message','/topics/' + params[:id].to_s + '/reply')
         @topic = Topic.find_by(id: params[:id])
         @session = session
         erb :'/messages/new'
@@ -18,11 +14,7 @@ class MessagesController < ApplicationController
     end
 
     get '/messages/:id/edit' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to edit messages."
-            session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/edit'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'edit a message','/messages/' + params[:id].to_s + '/edit')
         @message = Message.find_by(id: params[:id])
         if current_user(session) != @message.user
             flash[:message] = "Only the original poster of a message can edit it."
@@ -37,11 +29,7 @@ class MessagesController < ApplicationController
     end
 
     get '/messages/:id/delete' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to delete messages."
-            session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/delete'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'delete a message','/messages/' + params[:id].to_s + '/delete')
         @message = Message.find_by(id: params[:id])
         if current_user(session) != @message.user
             flash[:message] = "Only the original poster of a message can delete it."
@@ -61,11 +49,7 @@ class MessagesController < ApplicationController
     end
 
     post '/topics/:id/reply' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to post messages."
-            session[:failed_due_to_not_logged_in] = '/topics/' + params[:id].to_s + '/reply'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'post a message','/topics/' + params[:id].to_s + '/reply')
         if params[:content] == ""
             flash[:message] = "Messages can't be blank."
             redirect '/topics/' + params[:id].to_s + '/reply'
@@ -76,11 +60,7 @@ class MessagesController < ApplicationController
     end
 
     patch '/messages/:id/edit' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to edit messages."
-            session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/edit'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'edit a message','/messages/' + params[:id].to_s + '/edit')
         if params[:content] == ""
             flash[:message] = "Messages can't be blank."
             redirect '/messages/' + params[:id].to_s + '/edit'
@@ -96,11 +76,7 @@ class MessagesController < ApplicationController
     end
 
     delete '/messages/:id' do
-        if !logged_in?(session)
-            flash[:message] = "You must be logged in to delete messages."
-            session[:failed_due_to_not_logged_in] = '/messages/' + params[:id].to_s + '/delete'
-            redirect '/login'
-        end
+        redirect_if_logged_out(session, flash, 'delete a message','/messages/' + params[:id].to_s + '/delete')
         message = Message.find_by(id: params[:id])
         if current_user(session) != message.user
             flash[:message] = "Only the original poster of a message can delete it."
