@@ -32,7 +32,7 @@ class UsersController < ApplicationController
         user = User.find_by(username: params[:user][:username])
         if user && user.authenticate(params[:user][:password])
             session[:user_id] = user.id
-            session[:message] = "Login successful! Welcome back, #{current_user(session).username}!"
+            flash[:message] = "Login successful! Welcome back, #{current_user(session).username}!"
             if session[:failed_due_to_not_logged_in]
                 return_destination = session[:failed_due_to_not_logged_in].to_s
                 session[:failed_due_to_not_logged_in] = nil
